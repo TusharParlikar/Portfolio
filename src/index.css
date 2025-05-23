@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body{
+    @apply bg-black text-white relative font-sans h-screen overflow-x-hidden;
+  }
+}
