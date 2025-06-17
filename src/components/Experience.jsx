@@ -22,18 +22,14 @@ const Experience = () => {
           >
             <h3 className='text-xl sm:text-2xl font-medium tracking-wide text-gray-200 mb-6'>Work Experience</h3>
             
-            {/* Experience 1 */}
+            {/* ACES Club Membership */}
             <div className='bg-black/40 border border-gray-800 rounded-xl p-6 backdrop-blur-sm transition-all duration-300 hover:border-gray-600'>
-              <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4'>
-                <h4 className='text-lg font-medium text-white'>Frontend Contributor</h4>
+              <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2'>
+                <h4 className='text-lg font-medium text-white'>ACES Club Member</h4>
                 <span className='text-sm font-medium text-gray-400 mt-1 sm:mt-0'>Feb 2025 - Present</span>
               </div>
-              <h5 className='text-base text-[#e99b63] mb-2'>ACES Club (MIT-ADT)</h5>
-              <p className='text-sm text-gray-400 mb-4'>React.js, Tailwind CSS</p>
-              <ul className='list-disc list-inside text-sm text-gray-400 space-y-2'>
-                <li>Contributed to official ACES website using React.js and Tailwind CSS, improving site performance by 35%</li>
-                <li>Collaborated with cross-functional team members to enhance user interface and successfully deploy version 1.0</li>
-              </ul>
+              <h5 className='text-base text-[#e99b63] mb-2'>MIT-ADT</h5>
+              <p className='text-sm text-gray-400'>Active member of ACES, helping in frontend tech.</p>
             </div>
             
             {/* Experience 2 */}

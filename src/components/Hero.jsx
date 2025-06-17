@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'boxicons/css/boxicons.min.css';
+import DancingRobot from './DancingRobot';
 
 
 const Hero = () => {
@@ -45,7 +46,7 @@ const Hero = () => {
                     Contact Me
                 </a>
             </div>
-        </div>        {/* 3D Model Viewer */}
+        </div>        {/* 3D Dancing Robot Viewer */}
         <div 
             data-aos="fade-left"
             data-aos-offset="300"
@@ -53,36 +54,9 @@ const Hero = () => {
             className='relative z-50 w-full lg:w-1/2 flex items-center justify-center overflow-hidden'
             style={{ height: '600px' }}>
             {showModel ? (
-                <model-viewer 
-                    src="/space_station_4.glb"
-                    alt="3D Space Station Model"
-                    auto-rotate
-                    auto-rotate-delay="2000"
-                    rotation-per-second="15deg"
-                    camera-controls
-                    touch-action="pan-y"
-                    style={{
-                        width: '100%',
-                        height: '7000px',
-                        maxWidth: '1000px',
-                        backgroundColor: 'transparent',
-                        zIndex: 100
-                    }}
-                    camera-orbit="0deg 75deg 0.14m"
-                    field-of-view="130deg"
-                    min-camera-orbit="auto 10deg auto"
-                    max-camera-orbit="auto 160deg auto"
-                    min-field-of-view="25deg"
-                    max-field-of-view="45deg"
-                    interpolation-decay="200"
-                    environment-image="neutral"
-                    shadow-intensity="0.7"
-                    shadow-softness="0.8"
-                    exposure="1.2"
-                    tone-mapping="neutral"
-                    interaction-prompt="auto"
-                    interaction-prompt-threshold="2000"
-                ></model-viewer>
+                <div className="w-full h-full">
+                    <DancingRobot />
+                </div>
             ) : (
                 <div 
                     className="w-full h-[400px] max-w-[500px] bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg flex items-center justify-center"
@@ -90,7 +64,10 @@ const Hero = () => {
                         background: 'linear-gradient(135deg, rgba(101,101,101,0.1), rgba(233,155,99,0.1))'
                     }}
                 >
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+                        <p className="text-white/80 text-sm">Loading Dancing Robot...</p>
+                    </div>
                 </div>
             )}
         </div>

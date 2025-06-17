@@ -45,8 +45,9 @@ const Header = () => {
           </a>
         ))}
       </nav><a 
-        href="/Tushar_Parlikar_Resume.pdf" 
-        download
+        href="https://drive.google.com/file/d/1Gby0uIRduKIUTYU4ECGB7veqTsIbALpP/view?usp=sharing" 
+        target="_blank"
+        rel="noopener noreferrer"
         data-aos="fade-down"
         data-aos-easing="linear"
         data-aos-duration="3000"
@@ -81,8 +82,9 @@ const Header = () => {
                 {item.label}
               </a>
             ))}            <a 
-              href="/Tushar_Parlikar_Resume.pdf"
-              download
+              href="https://drive.google.com/file/d/1Gby0uIRduKIUTYU4ECGB7veqTsIbALpP/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className='bg-[#a7a7a7] text-black py-3 px-8 rounded-full border-none font-medium transition-all duration-500 hover:bg-white cursor-pointer mt-4 self-start'
               onClick={closeMobileMenu}
             >

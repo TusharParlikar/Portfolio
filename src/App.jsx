@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import WhatsNew from './components/WhatsNew'
 import Experience from './components/Experience'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
@@ -31,9 +32,9 @@ const App = () => {
       />
       {/* Blur Effect */}
       <div className='h-96 w-96 absolute top-[20%] right-[-10%] bg-gradient-to-br from-pink-400 to-purple-600 rounded-full blur-3xl opacity-30 -rotate-[30deg] -z-10'>
-      </div>
-      <Header/>
+      </div>      <Header/>
       <Hero/>
+      <WhatsNew/>
       <Experience/>
       <Projects/>
       <Skills/>
