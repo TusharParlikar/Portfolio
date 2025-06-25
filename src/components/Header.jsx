@@ -1,16 +1,60 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import 'boxicons/css/boxicons.min.css';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);  
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
+  const handleNavigation = (target) => {
+    closeMobileMenu();
+    
+    if (location.pathname !== '/') {
+      // If not on home page, navigate to home first, then scroll to section
+      navigate('/');
+      setTimeout(() => {
+        const element = document.querySelector(target);
+        if (element) {
+          const headerOffset = 80; // Account for fixed header
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    } else {
+      // If on home page, just scroll to section with offset
+      const element = document.querySelector(target);
+      if (element) {
+        const headerOffset = 80; // Account for fixed header
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
+
+  const handleLogoClick = () => {
+    closeMobileMenu();
+    navigate('/');
+  };  
   const navItems = [
     { label: 'ABOUT', to: '#about' },
     { label: 'EXPERIENCE', to: '#experience' },
     { label: 'PROJECTS', to: '#projects' },
-    { label: 'SKILLS', to: '#skills' }
+    { label: 'SKILLS', to: '#skills' },
+    { label: 'CONTACT', to: '#contact' }
   ];
 
   const linkClasses = 'text-base tracking-wider transition-colors hover:text-red-600 ml-4 p-2';
@@ -21,17 +65,18 @@ const Header = () => {
         data-aos="fade-down"
         data-aos-easing="linear"
         data-aos-duration="1500"
-        className='text-3xl md:text-4xl lg:text-5xl font-light m-0'
+        className='text-3xl md:text-4xl lg:text-5xl font-light m-0 cursor-pointer hover:text-gray-300 transition-colors'
+        onClick={handleLogoClick}
       >
         TUSHAR
       </h1>
         {/* Desktop Navigation */}
       <nav className="hidden md:flex items-center">
         {navItems.map((item, index) => (
-          <a 
+          <button 
             key={item.label}
-            href={item.to} 
-            className={linkClasses}
+            onClick={() => handleNavigation(item.to)}
+            className={`${linkClasses} bg-transparent border-none cursor-pointer`}
             data-aos="fade-down"
             data-aos-easing="linear"
             data-aos-duration={1000 + (index * 500)}
@@ -42,7 +87,7 @@ const Header = () => {
             }}
           >
             {item.label}
-          </a>
+          </button>
         ))}
       </nav><a 
         href="https://drive.google.com/file/d/1Gby0uIRduKIUTYU4ECGB7veqTsIbALpP/view?usp=sharing" 
@@ -73,14 +118,13 @@ const Header = () => {
       {isMobileMenuOpen && (
         <div className='absolute top-full left-0 right-0 w-full bg-black/95 backdrop-blur-sm md:hidden z-50'>          <nav className="flex flex-col py-6 px-4 text-left">
             {navItems.map((item) => (
-              <a 
+              <button 
                 key={item.label}
-                href={item.to} 
-                className={mobileLinkClasses}
-                onClick={closeMobileMenu}
+                onClick={() => handleNavigation(item.to)}
+                className={`${mobileLinkClasses} bg-transparent border-none cursor-pointer text-left w-full`}
               >
                 {item.label}
-              </a>
+              </button>
             ))}            <a 
               href="https://drive.google.com/file/d/1Gby0uIRduKIUTYU4ECGB7veqTsIbALpP/view?usp=sharing"
               target="_blank"

@@ -11,6 +11,9 @@ node_modules
 dist
 dist-ssr
 *.local
+.cache
+.vercel
+.output
 
 # Environment variables
 .env
@@ -18,6 +21,31 @@ dist-ssr
 .env.development.local
 .env.test.local
 .env.production.local
+.vercel
+.env*.local
+
+# Sensitive files
+**/mongodb-credentials.js
+**/*-private.*
+**/*-secret.*
+**/credentials.*
+**/secrets.*
+
+# Project-specific files to ignore
+update.md
+SEO-tracking.md
+netlify.toml
+netlify/
+
+# Empty or unused directories
+public/models/
+public/textures/
+
+# Placeholder or verification files
+public/googleXXXXXXXXXXXXXXXX.html
+
+# Duplicate assets
+src/logo/
 
 # Editor directories and files
 .vscode/*

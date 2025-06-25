@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import 'boxicons/css/boxicons.min.css';
 import emailjs from '@emailjs/browser';
 
@@ -10,14 +11,38 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setFormStatus({ message: '', isError: false });    emailjs
-      .sendForm(
+    setFormStatus({ message: '', isError: false });
+
+    // Get form data
+    const formData = new FormData(form.current);
+    
+    // Properly structure email parameters for sender recognition
+    const emailParams = {
+      // Critical sender information
+      from_name: formData.get('user_name'),
+      from_email: formData.get('user_email'),     // This ensures sender recognition
+      reply_to: formData.get('user_email'),       // This ensures replies go to sender
+      
+      // Recipient information
+      to_name: 'Tushar Parlikar',
+      to_email: 'tparlikar497@gmail.com',
+      
+      // Message content
+      subject: formData.get('subject'),
+      message: formData.get('message'),
+      
+      // Additional metadata
+      sent_from: 'Portfolio Website',
+      timestamp: new Date().toLocaleString(),
+      user_agent: navigator.userAgent
+    };
+
+    emailjs
+      .send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        form.current, 
-        {
-          publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-        }
+        emailParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(
         () => {
@@ -28,8 +53,9 @@ const Contact = () => {
           form.current.reset();
         },
         (error) => {
+          console.error('EmailJS Error:', error);
           setFormStatus({ 
-            message: `Failed to send message: ${error.text}`, 
+            message: `Failed to send message. Please try again or contact directly at tparlikar497@gmail.com`, 
             isError: true 
           });
         }
@@ -59,6 +85,27 @@ const Contact = () => {
             <p className='text-base sm:text-lg text-gray-400 max-w-xl'>
               I'm currently open to new opportunities and collaborations. Feel free to reach out if you're looking for a developer or just want to connect!
             </p>
+            
+            {/* Quick vs Detailed Contact Options */}
+            <div className='bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-800/30 rounded-xl p-6 mb-8'>
+              <h4 className='text-lg font-medium text-white mb-3'>Contact Options</h4>
+              <div className='space-y-3'>
+                <div className='flex items-center gap-3'>
+                  <i className='bx bx-message-square-dots text-blue-400'></i>
+                  <span className='text-gray-300'>Quick message using the form on this page</span>
+                </div>
+                <div className='flex items-center gap-3'>
+                  <i className='bx bx-file-blank text-purple-400'></i>
+                  <span className='text-gray-300'>Detailed project requirements</span>
+                  <Link 
+                    to='/project-form' 
+                    className='ml-auto bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300'
+                  >
+                    Fill Detailed Form
+                  </Link>
+                </div>
+              </div>
+            </div>
             
             <div className='space-y-6'>
               {/* Email */}
